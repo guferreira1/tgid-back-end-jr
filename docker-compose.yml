@@ -1,0 +1,20 @@
+version: "3"
+volumes: 
+  tgid-db-data: 
+  tgid_data:
+    driver: local
+networks: 
+  tgid-db-network: 
+services: 
+  tgid-db: 
+    image: 'postgres'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tgid-db
+    ports: 
+      - "5432:5432"
+    volumes: 
+      - tgid-db-data:/var/lib/postgresql/data
+    networks: 
+      - tgid-db-network

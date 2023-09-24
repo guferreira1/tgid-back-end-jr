@@ -67,6 +67,7 @@ public class BusinessService {
         businessResponse.setTaxes(taxes);
         businessResponse.setPassword(business.getPassword());
         businessResponse.setEmail(business.getEmail());
+        businessResponse.setTotalValue(business.getTotalValue());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(businessResponse);
     }
@@ -98,6 +99,7 @@ public class BusinessService {
             b.setId(business.getId());
             b.setName(business.getName());
             b.setPassword(business.getPassword());
+            b.setTotalValue(business.getTotalValue());
 
             businessResponse.add(b);
         }
@@ -130,6 +132,7 @@ public class BusinessService {
         businessResponse.setId(business.getId());
         businessResponse.setCnpj(business.getCnpj());
         businessResponse.setEmail(business.getEmail());
+        businessResponse.setTotalValue(business.getTotalValue());
 
         return ResponseEntity.status(HttpStatus.OK).body(businessResponse);
     }
@@ -151,6 +154,9 @@ public class BusinessService {
         }
         if (Objects.nonNull(dto.getTaxes())) {
             foundBusiness.setTaxes(dto.getTaxes());
+        }
+        if(Objects.nonNull(dto.getTotalValue())){
+            foundBusiness.setTotalValue(dto.getTotalValue());
         }
         if (Objects.nonNull(dto.getCnpj())) {
             throw new BusinessException(HttpStatus.BAD_REQUEST.value(), "Não é possível alterar o CNPJ.");

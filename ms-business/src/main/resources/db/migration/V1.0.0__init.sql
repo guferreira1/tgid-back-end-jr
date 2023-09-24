@@ -3,7 +3,8 @@ CREATE TABLE business (
     name VARCHAR(150) NOT NULL,
     cnpj VARCHAR(20) NOT NULL UNIQUE,
     email VARCHAR(150) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    total_value NUMERIC(10, 2) DEFAULT 1000.00 NOT NULL
 );
 
 CREATE TABLE taxes (

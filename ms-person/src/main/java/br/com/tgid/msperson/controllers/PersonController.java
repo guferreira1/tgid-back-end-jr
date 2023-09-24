@@ -2,6 +2,8 @@ package br.com.tgid.msperson.controllers;
 
 
 import br.com.tgid.msperson.dtos.request.UpdatePersonDtoRequest;
+import br.com.tgid.msperson.dtos.request.UpdateWalletDtoRequest;
+import br.com.tgid.msperson.dtos.response.WalletDtoResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,5 +57,13 @@ public class PersonController {
 	public ResponseEntity<Void> delete(
 			@PathVariable(required = true) final Long id) {
 		return personService.delete(id);
+	}
+
+	@ApiOperation("Update wallet")
+	@PatchMapping("wallet/{id}")
+	public ResponseEntity<WalletDtoResponse> update(
+			@PathVariable(required = true) final Long id,
+			@RequestBody(required = true) final UpdateWalletDtoRequest dto) {
+		return this.personService.update(id, dto);
 	}
 }

@@ -1,6 +1,7 @@
 package br.com.tgid.gatewayapi.business.controllers;
 
 import br.com.tgid.gatewayapi.business.dtos.request.CreateBusinessDtoRequest;
+import br.com.tgid.gatewayapi.business.dtos.request.DepositDtoRequest;
 import br.com.tgid.gatewayapi.business.dtos.request.UpdateBusinessDtoRequest;
 import br.com.tgid.gatewayapi.business.dtos.response.BusinessDtoResponse;
 import br.com.tgid.gatewayapi.business.services.BusinessService;
@@ -52,5 +53,19 @@ public class BusinessControllerImpl implements BusinessController {
     public ResponseEntity<Void> delete(
             @PathVariable(required = true) final Long id) {
         return this.businessService.delete(id);
+    }
+
+    @Override
+    @PostMapping("/deposit")
+    public ResponseEntity<DepositDtoRequest> deposit(
+            @RequestBody(required = true) final DepositDtoRequest dto) {
+        return this.businessService.deposit(dto);
+    }
+
+    @Override
+    @PostMapping("/withdraw")
+    public ResponseEntity<DepositDtoRequest> withdraw(
+            @RequestBody(required = true) final DepositDtoRequest dto) {
+        return this.businessService.withdraw(dto);
     }
 }

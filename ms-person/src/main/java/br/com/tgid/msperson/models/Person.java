@@ -1,5 +1,7 @@
 package br.com.tgid.msperson.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -32,6 +34,7 @@ public class Person {
 	@NotNull
 	private String password;
 
+	@JsonBackReference
 	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
 	private Wallet wallet;
 

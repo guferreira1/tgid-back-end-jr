@@ -23,8 +23,6 @@ public class Wallet {
     @JoinColumn(name = "person_id")
     private Person person;
 
-
-
     public UUID getId() {
         return id;
     }

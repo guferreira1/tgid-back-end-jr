@@ -3,6 +3,7 @@ package br.com.tgid.gatewayapi.business.dtos.request;
 import br.com.tgid.gatewayapi.business.dtos.response.TaxesDtoResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,6 +16,8 @@ public class UpdateBusinessDtoRequest {
     private String email;
 
     private String password;
+
+    private BigDecimal totalValue;
 
     private Collection<TaxesDtoResponse> taxes;
 
@@ -48,6 +51,14 @@ public class UpdateBusinessDtoRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public BigDecimal getTotalValue() {
+        return totalValue;
+    }
+
+    public void setTotalValue(BigDecimal totalValue) {
+        this.totalValue = totalValue;
     }
 
     public Collection<TaxesDtoResponse> getTaxes() {

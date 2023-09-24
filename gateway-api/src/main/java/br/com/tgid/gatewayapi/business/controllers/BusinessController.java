@@ -1,8 +1,10 @@
 package br.com.tgid.gatewayapi.business.controllers;
 
 import br.com.tgid.gatewayapi.business.dtos.request.CreateBusinessDtoRequest;
+import br.com.tgid.gatewayapi.business.dtos.request.DepositDtoRequest;
 import br.com.tgid.gatewayapi.business.dtos.request.UpdateBusinessDtoRequest;
 import br.com.tgid.gatewayapi.business.dtos.response.BusinessDtoResponse;
+import br.com.tgid.gatewayapi.person.dtos.response.PersonDtoResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -53,4 +55,20 @@ public interface BusinessController {
             @ApiResponse(code = 400, message = "Request inválido")
     })
     public ResponseEntity<Void> delete(final Long id);
+
+    @ApiOperation(value = "Deposito de um cliente", produces = APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Sucesso", response = PersonDtoResponse.class),
+            @ApiResponse(code = 404, message = "Pessoa não encontrada"),
+            @ApiResponse(code = 400, message = "Request inválido")
+    })
+    public ResponseEntity<DepositDtoRequest> deposit(final DepositDtoRequest dto);
+
+    @ApiOperation(value = "Retirada de um cliente", produces = APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Sucesso", response = PersonDtoResponse.class),
+            @ApiResponse(code = 404, message = "Pessoa não encontrada"),
+            @ApiResponse(code = 400, message = "Request inválido")
+    })
+    public ResponseEntity<DepositDtoRequest> withdraw(final DepositDtoRequest dto);
 }

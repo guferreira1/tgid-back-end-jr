@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import br.com.tgid.msperson.configs.BusinessException;
 import br.com.tgid.msperson.dtos.request.UpdatePersonDtoRequest;
+import br.com.tgid.msperson.dtos.request.UpdateWalletDtoRequest;
 import br.com.tgid.msperson.dtos.response.WalletDtoResponse;
 import br.com.tgid.msperson.models.Person;
 import br.com.tgid.msperson.models.Wallet;
@@ -179,6 +180,32 @@ public class PersonService {
 
 		return ResponseEntity.noContent().build();
 	}
+
+	public ResponseEntity<WalletDtoResponse> update(
+			@Valid @NotNull @Min(1) final Long id,
+			@Valid @NotNull final UpdateWalletDtoRequest dto) {
+
+		LOGGER.info("Search wallet...");
+		Wallet wallet = this.walletRepository.findWallet(id).
+				orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND.value(), "Carteira não encontrada"));
+		LOGGER.info("Found.");
+
+		if (Objects.nonNull(dto.getAmount())) {
+			wallet.setAmount(dto.getAmount());
+		}
+
+		LOGGER.info("Save wallet...");
+		this.walletRepository.save(wallet);
+		LOGGER.info("Saved.");
+
+		WalletDtoResponse walletResponse = new WalletDtoResponse();
+		walletResponse.setAmount(wallet.getAmount());
+		walletResponse.setId(walletResponse.getId());
+		walletResponse.setPerson(wallet.getPerson());
+
+		return ResponseEntity.status(CREATED).body(walletResponse);
+	}
+
 	private WalletDtoResponse createWallet(final Person personWallet) {
 		Wallet createWallet = new Wallet();
 		createWallet.setPerson(personWallet);

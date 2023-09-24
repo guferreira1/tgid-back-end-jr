@@ -3,7 +3,9 @@ package br.com.tgid.gatewayapi.person.services;
 import br.com.tgid.gatewayapi.person.clients.PersonClient;
 import br.com.tgid.gatewayapi.person.dtos.request.CreatePersonDtoRequest;
 import br.com.tgid.gatewayapi.person.dtos.request.UpdatePersonDtoRequest;
+import br.com.tgid.gatewayapi.person.dtos.request.UpdateWalletDtoRequest;
 import br.com.tgid.gatewayapi.person.dtos.response.PersonDtoResponse;
+import br.com.tgid.gatewayapi.person.dtos.response.WalletDtoResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +43,10 @@ public class PersonService {
     public ResponseEntity<Void> delete(Long id) {
 
         return this.personClient.delete(id);
+    }
+
+    public ResponseEntity<WalletDtoResponse> updateWallet(final Long id, final UpdateWalletDtoRequest dto) {
+
+        return this.personClient.update(id, dto);
     }
 }

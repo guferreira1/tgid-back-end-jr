@@ -2,6 +2,7 @@ package br.com.tgid.msbusiness.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @Entity
@@ -22,6 +23,9 @@ public class Business {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private BigDecimal totalValue = new BigDecimal("1000.00");
 
     @OneToMany(mappedBy = "business", cascade = CascadeType.ALL)
     private Collection<Taxes> taxes;
@@ -64,6 +68,14 @@ public class Business {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public BigDecimal getTotalValue() {
+        return totalValue;
+    }
+
+    public void setTotalValue(BigDecimal totalValue) {
+        this.totalValue = totalValue;
     }
 
     public Collection<Taxes> getTaxes() {

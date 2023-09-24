@@ -2,7 +2,9 @@ package br.com.tgid.gatewayapi.person.clients;
 
 import br.com.tgid.gatewayapi.person.dtos.request.CreatePersonDtoRequest;
 import br.com.tgid.gatewayapi.person.dtos.request.UpdatePersonDtoRequest;
+import br.com.tgid.gatewayapi.person.dtos.request.UpdateWalletDtoRequest;
 import br.com.tgid.gatewayapi.person.dtos.response.PersonDtoResponse;
+import br.com.tgid.gatewayapi.person.dtos.response.WalletDtoResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -93,5 +95,19 @@ public class PersonClient {
 
         return restTemplate.exchange(request,
                 new ParameterizedTypeReference<Void>() {});
+    }
+
+    public ResponseEntity<WalletDtoResponse> update(Long id, UpdateWalletDtoRequest dto) {
+        final URI uri = UriComponentsBuilder.fromHttpUrl(hostMsPerson)
+                .path("api/v1/persons/wallet/{id}")
+                .build(id);
+
+        final RequestEntity<UpdateWalletDtoRequest> request = RequestEntity.patch(uri)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(dto);
+
+        return restTemplate.exchange(request,
+                new ParameterizedTypeReference<WalletDtoResponse>() {});
     }
 }

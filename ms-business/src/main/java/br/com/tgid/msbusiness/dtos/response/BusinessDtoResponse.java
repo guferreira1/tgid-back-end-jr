@@ -2,6 +2,7 @@ package br.com.tgid.msbusiness.dtos.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 public class BusinessDtoResponse {
@@ -20,6 +21,9 @@ public class BusinessDtoResponse {
 
     @JsonProperty
     private String password;
+
+    @JsonProperty
+    private BigDecimal totalValue;
 
     @JsonProperty
     private Collection<TaxesDtoResponse> taxes;
@@ -62,6 +66,14 @@ public class BusinessDtoResponse {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public BigDecimal getTotalValue() {
+        return totalValue;
+    }
+
+    public void setTotalValue(BigDecimal totalValue) {
+        this.totalValue = totalValue;
     }
 
     public Collection<TaxesDtoResponse> getTaxes() {

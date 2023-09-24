@@ -63,7 +63,7 @@ public class PersonService {
 		personResponse.setFirstName(person.getFirstName());
 		personResponse.setLastName(person.getFirstName());
 		personResponse.setPassword(person.getPassword());
-		
+
 		return ResponseEntity.status(CREATED).body(personResponse);
 	}
 
@@ -83,6 +83,13 @@ public class PersonService {
 			p.setCpf(person.getCpf());
 			p.setEmail(person.getEmail());
 			p.setPassword(person.getPassword());
+
+			Wallet wallet = person.getWallet();
+			if (wallet != null) {
+				WalletDtoResponse walletResponse = new WalletDtoResponse();
+				walletResponse.setAmount(wallet.getAmount());
+				p.setWallet(walletResponse);
+			}
 
 			personsResponse.add(p);
 		}

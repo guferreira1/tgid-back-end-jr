@@ -51,7 +51,6 @@ public class PersonService {
 			personRepository.save(person);
 			LOGGER.info("Saved.");
 
-
 			this.createWallet(person);
 		} catch (RuntimeException ex) {
 			throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
